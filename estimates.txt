@@ -1,0 +1,17 @@
+In case of single AZ outage, we fully rely on AWS resiliency. According to AWS
+Documentation of Amazon RDS for MySQL, single AZ outage should be quote on quote
+"minutes". As of experimenting, we could expect minimum RTO be 5 minutes and RPO
+be 1 second for single AZ outage.
+
+In case of region outage, it takes more time to promote the read replica and while
+promoting, new snapshot of RDS are taken to reduce next time RPO. In addtionally,
+since we does not implement auto promotion, we expect some down time for staff to
+be paged and take action. In general, the whole process of promoting should take
+above 20 minutes in total as in our experimental. On the other hand, automatic
+backups of AWS ensuring minimum RPO still be less than 1 second.
+
+Conclusion:
+Minimum RTO for a single AZ outage: 5 minutes
+Minimum RTO for a single region outage: 1 second
+Minimum RPO for a single AZ outage: 20 minutes
+Minimum RPO for a single region outage: 1 second

@@ -1,0 +1,47 @@
+[ec2-user@ip-10-2-10-79 ~]$ mysql -h udacity-backup.cppnmqjlgnxm.us-east-1.rds.amazonaws.com -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 52
+Server version: 8.0.35 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test_db            |
++--------------------+
+5 rows in set (0.005 sec)
+
+MySQL [(none)]> use test_db
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [test_db]> show tables;
++-------------------+
+| Tables_in_test_db |
++-------------------+
+| test_table        |
++-------------------+
+1 row in set (0.001 sec)
+
+MySQL [test_db]> select * from test_table;
++------+
+| ID   |
++------+
+|    1 |
++------+
+1 row in set (0.001 sec)
+
+MySQL [test_db]> insert into test_table(2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2)' at line 1
+MySQL [test_db]> insert into test_table values (2);
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement

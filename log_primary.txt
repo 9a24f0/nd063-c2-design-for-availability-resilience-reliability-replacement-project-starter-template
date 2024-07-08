@@ -1,0 +1,68 @@
+[ec2-user@ip-10-1-10-214 ~]$ mysql -h udacity.cgmce38tn0d5.us-east-2.rds.amazonaws.com -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 93
+Server version: 8.0.35 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.002 sec)
+
+MySQL [(none)]> create database test_db;
+Query OK, 1 row affected (0.008 sec)
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test_db            |
++--------------------+
+5 rows in set (0.001 sec)
+
+MySQL [(none)]> use test_db;
+Database changed
+MySQL [test_db]> CREATE TABLE test_table (
+    ->     ID int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+MySQL [test_db]> CREATE TABLE test_table (
+    ->     ID int
+    -> );
+Query OK, 0 rows affected (0.075 sec)
+
+MySQL [test_db]> show tables;
++-------------------+
+| Tables_in_test_db |
++-------------------+
+| test_table        |
++-------------------+
+1 row in set (0.003 sec)
+
+MySQL [test_db]> insert into test_db values(1);
+ERROR 1146 (42S02): Table 'test_db.test_db' doesn't exist
+MySQL [test_db]> insert into test_table values(1);
+Query OK, 1 row affected (0.010 sec)
+
+MySQL [test_db]> show test_table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'test_table' at line 1
+MySQL [test_db]> select * from test_table;
++------+
+| ID   |
++------+
+|    1 |
++------+
+1 row in set (0.001 sec)
